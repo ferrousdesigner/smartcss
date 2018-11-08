@@ -1,0 +1,64 @@
+body{
+    color: #888;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.title i{
+    margin-left: 5px;
+    color: #dc0000;
+}
+.control-container {
+    justify-content: center;
+    background: white;
+    padding: 1rem 2rem;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+    border-radius: 5px;
+}
+ .start {
+    background: #dc0000;
+    padding: 0.8rem 1.5rem;
+    color: #fff;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.start:focus{
+    outline: none;
+}
+.start span {
+    margin-right: 5px;
+}
+.start i {
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.start:hover {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.rotate > i {
+    animation: rotate 0.3s linear infinite;
+}
+@keyframes rotate {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+.ferrous-link {
+    color: #dc0000;
+    text-decoration: none;
+}
