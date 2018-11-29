@@ -1,18 +1,11 @@
 chrome.runtime.onMessage.addListener((checkMessage))
+function checkMessage(message, sender, sendResponse) {
+    start(message)
+}
 
-function checkMessage (message, sender, sendResponse) {
-    if(message === 'stop') {
-        stop () 
-    } else {
-        start(message)
-        // return sendResponse({status: 'running'})
-    }
- }
-
-function start (message) {
+function start(message) {
     if (message.status === 'start') {
-        console.log("Starting the SmartCSS.")
-        if(document.querySelector('.smartcss-interface')) {
+        if (document.querySelector('.smartcss-interface')) {
             document.getElementsByTagName('body')[0].removeChild(document.querySelector('.smartcss-interface'))
         }
         var globalCSS = `
@@ -45,7 +38,7 @@ function start (message) {
                 width: 11px;
                 height: 11px;
                 border-radius: 50%;
-                background: #4838cd;
+                background: #6e38cd;
                 animation-timing-function: cubic-bezier(0, 1, 1, 0);
               }
               .smartcss-loader-ellipsis div:nth-child(1) {
@@ -131,6 +124,7 @@ function start (message) {
                 display: flex;
                 justify-content: flex-start;
                 align-items: flex-start;
+                position: relative;
             }
             .selected-element-displayer div:first-child{
                 padding: 1rem;
@@ -139,10 +133,9 @@ function start (message) {
             }
             .selected-element-displayer div:nth-child(2) {
                 padding: 1rem;
-                background: #444
                 color: #fff;
                 display: inline-block;
-                color: #4838cd;
+                color: #6e38cd;
             }
             .selected-element > *{
     
@@ -213,7 +206,7 @@ function start (message) {
                 font-weight: bolder;
             }
             .smartcss-tweaker > div > div > span{
-                color: #4838cd;
+                color: #6e38cd;
                 font-size: 1.2rem;
             }
             .smartcss-slider {
@@ -231,7 +224,7 @@ function start (message) {
                 border-radius: 0 !important;
             }
             .smartcss-slider:focus {
-                background: #4838cd; /* Fully shown on mouse-over */
+                background: #6e38cd; /* Fully shown on mouse-over */
             }
             .smartcss-slider::-webkit-slider-thumb {
                 -webkit-appearance: none; /* Override default look */
@@ -268,12 +261,12 @@ function start (message) {
             } 
             .smartcss-property-btn:hover {
                 color: #fff !important;
-                background: #4838cd !important;
+                background: #6e38cd !important;
                 border-color: transparent !important;
             }
             .smartcss-property-btn.active {
                 color: #fff !important;
-                background: #4838cd !important;
+                background: #6e38cd !important;
                 border-color: transparent !important;
             }
             .smartcss-reset-btn{
@@ -316,7 +309,7 @@ function start (message) {
                 transform: scale(0.96);
             }
             .smartcss-reset-btn:hover{
-                color: #4838cd;
+                color: #6e38cd;
             }
             .smartcss-reset-btn:focus{
                 outline: none;
@@ -334,7 +327,7 @@ function start (message) {
             }
             .actions > button {
                 border: none;
-                background: #4838cd;
+                background: #6e38cd;
                 color: #fff;
                 width: 100px;
                 padding: 1rem 2rem;
@@ -361,7 +354,7 @@ function start (message) {
                 font-size: 16px;
                 margin-left: 5px;
                 font-weight: normal;
-                color: #4838cd;
+                color: #6e38cd;
             }
             .smartcss-actions-container{
                 position: absolute;
@@ -383,7 +376,7 @@ function start (message) {
             }
             .smartcss-actions-container > button {
                 color: #fff !important;
-                background: #4838cd !important;
+                background: #6e38cd !important;
                 border-color: transparent !important;
                 width: 100%;
                 height: 100%;
@@ -401,7 +394,7 @@ function start (message) {
             }
             smartcss-compound-property-value{
                 margin-left: 3px;
-                color: #4838cd;
+                color: #6e38cd;
             }
             .smartcss-compound-property {
                 width: 100% !important;
@@ -421,7 +414,7 @@ function start (message) {
                 overflow-x: auto;
                 padding: 0.4rem 0.7rem;
                 color: #666;
-                background: #4838cd22;
+                background: #6e38cd22;
                 border-radius: 30px;
             }
             .smartcss-part-container {
@@ -450,7 +443,7 @@ function start (message) {
                 line-height: 1.5;
                 height: 100%;
                 width: 100%;
-                background: #4838cd;
+                background: #6e38cd;
                 padding: 1rem;
                 color: #fff !important;
                 z-index: 2;
@@ -466,7 +459,7 @@ function start (message) {
                 line-height: 1.5;
                 height: calc(100vh);
                 width: 300px;
-                background: #4838cd;
+                background: #6e38cd;
                 padding: 1rem;
                 color: #fff !important;
                 z-index: 2;
@@ -487,7 +480,7 @@ function start (message) {
                 cursor: pointer;
                 position: absolute;
                 z-index: 5;
-                color: #4838cd;
+                color: #6e38cd;
                 background: #fff;
                 border: 3px solid transparent;
                 bottom: 10px;
@@ -496,7 +489,7 @@ function start (message) {
                 transition: all 0.2s ease-in-out;
             }
             .smartcss-text-container > button:hover {
-                background: #4838cd;
+                background: #6e38cd;
                 color: #fff;
                 border: 3px solid #fff;
             }
@@ -517,6 +510,33 @@ function start (message) {
             .slide-in {
                 transform: translateX(0%);
             }
+            .smartcss-glow {
+                animation: smartcss-glow 0.5s ease-in-out 1;
+            }
+            @keyframes smartcss-glow  {
+                0%{
+                    box-shadow: 0 0 50px transparent;
+                }
+                50%{
+                    box-shadow: 0 0 50px #6e38cd;
+                }
+                100% {
+                    box-shadow: 0 0 50px transparent;
+                }
+            }
+            .smartcss-unit-changer{
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+            .smartcss-unit-changer button {
+                padding: 0.2rem;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
             @media only screen and (max-width: 1000px){
                 .action {
                     display: flex;
@@ -525,56 +545,82 @@ function start (message) {
         `
         styleMaker(globalCSS)
         smartCSSInitializer()
-    } 
+    }
     var defaultValues = {}
     var changedValues = {}
     var activeProperty = ''
     var selectedElement = ''
     var activePropertyValues = {}
     var allStyle = {}
-    var activecomplexProperties = {
+    var activecomplexProperties = {}
+    var unit = 'px'
 
-    }
     function updateCSS() {
         let cssString = ''
-        let totalStyle = {...changedValues}
+        let totalStyle = {...changedValues
+        }
         Object.keys(totalStyle).forEach((property, i) => {
             cssString += '<br><span style="color: #fff;">' + property + '</span>: ' + Object.values(totalStyle)[i] + ';'
         })
         document.querySelector('.smartcss-text').innerHTML = cssString
     }
-    var supportedProperties = ['width', 'height', 'left', 'right', 'top', 'bottom', 'margin', 'margin-left', 'margin-right', 'margin-top', 'margin-bottom', 'padding', 'padding-left', 'padding-right', 'padding-top', 'padding-bottom', 'opacity', 'position', 'display', 'color', 'background-color', 'justify-content', 'align-items', 'font-size', 'transform', 'border-radius']
-    var pxProperties = ['translateX', 'translateY', 'translateZ', 'width', 'height', 'left', 'right', 'top', 'bottom', 'margin', 'margin-left', 'margin-right', 'margin-top', 'margin-bottom', 'padding', 'padding-left', 'padding-right', 'padding-top', 'padding-bottom', 'font-size', 'border-radius']
+    var supportedProperties = ['width', 'height', 'min-height', 'max-height', 'min-width', 'max-width', 'display', 'position', 'left', 'right', 'top', 'bottom', 'margin', 'margin-left', 'margin-right', 'margin-top', 'margin-bottom', 'padding', 'padding-left', 'padding-right', 'padding-top', 'padding-bottom', 'opacity', 'color', 'background-color', 'justify-content', 'align-items', 'font-size', 'transform', 'border-width', 'border-style', 'border-color', 'border-radius', ]
+    var pxProperties = ['translateX', 'translateY', 'translateZ', 'width', 'height', 'left', 'right', 'top', 'bottom', 'margin', 'margin-left', 'margin-right', 'margin-top', 'margin-bottom', 'padding', 'padding-left', 'padding-right', 'padding-top', 'padding-bottom', 'font-size', 'border-radius', 'border-width', 'min-height', 'max-height', 'min-width', 'max-width']
     var absoluteProperties = ['opacity', 'scaleX', 'scaleY', 'scaleZ']
-    var numericProperty = ['width', 'height', 'left', 'right', 'top', 'bottom', 'opacity', 'margin', 'margin-left', 'margin-right', 'margin-top', 'margin-bottom', 'padding', 'padding-left', 'padding-right', 'padding-top', 'padding-bottom', 'font-size', 'border-radius']
-    var alphabeticProperty = ['position', 'display', 'justify-content', 'align-items']
+    var numericProperty = ['width', 'height', 'left', 'right', 'top', 'bottom', 'opacity', 'margin', 'margin-left', 'margin-right', 'margin-top', 'margin-bottom', 'padding', 'padding-left', 'padding-right', 'padding-top', 'padding-bottom', 'font-size', 'border-radius', 'border-width', 'min-height', 'max-height', 'min-width', 'max-width']
+    var alphabeticProperty = ['position', 'display', 'justify-content', 'align-items', 'border-style']
     var radianProperties = ['rotateX', 'rotateY', 'rotateZ', 'skewX', 'skewY']
     var complexProperty = ['transform']
-    var colorProperties = ['color', 'background-color']
+    var colorProperties = ['color', 'background-color', 'border-color']
+    var changeUnit = (e) => {
+        if (e) {
+            let buttons = [].slice.call(e.target.parentNode.children)
+            buttons.forEach(child => child.style.color = '#888')
+            e.target.style.color = '#6e38cd'
+            let sliders = document.querySelectorAll('.smartcss-slider')
+            if (sliders) {
+                sliders.forEach(slider => {
+                    document.getElementById(slider.getAttribute('data-value-span')).innerText = document.getElementById(slider.getAttribute('data-value-span')).innerText.replace(unit, String(e.target.innerText))
+                })
+            }
+            unit = String(e.target.innerText)
+        } else {
+            unit = 'px'
+            document.querySelectorAll('.smartcss-unit-changer > button').forEach((button) => {
+                if (button.innerText === 'px') {
+                    button.style.color = '#6e38cd'
+                } else {
+                    button.style.color = '#888'
+                }
+            })
+        }
+
+    }
+
     function smartCSSInitializer() {
         var elemToQuery = ['div', 'button', 'a', 'p', 'span', 'img', 'section', 'article', 'h1', 'h2', 'h3', 'h4', 'h6', 'ul', 'li', 'ol', 'table']
         var totalElems = []
         document.querySelector('body').style.paddingBottom = '308px'
         elemToQuery.forEach((elem) => {
             var temp = document.querySelectorAll(elem)
-            if(['a'].includes(elem)) {
+            if (['a'].includes(elem)) {
                 temp.forEach(a => a.onclick = e => e.preventDefault())
             }
             var elems = Array.prototype.slice.call(temp, 0)
-            if(elems.length > 0) {
+            if (elems.length > 0) {
                 totalElems = totalElems.concat(elems)
             }
         })
         var interface = createUIElements('interface')
         interface.appendChild(createUIElements('loader'))
         document.body.appendChild(interface)
-        if(totalElems.length > 0) {
+        if (totalElems.length > 0) {
             bindDoubleClick(totalElems)
             var toolbar = createUIElements('toolbar')
-            var chooser= createUIElements('chooser')
-            var actions= createUIElements('actions')
-            var tweaker= createUIElements('tweaker')
-            var cssText= createUIElements('css-text')
+            var chooser = createUIElements('chooser')
+            var actions = createUIElements('actions')
+            var tweaker = createUIElements('tweaker')
+            var cssText = createUIElements('css-text')
             var partInterface = createUIElements('part-slider')
             interface.appendChild(cssText)
             interface.appendChild(toolbar)
@@ -583,22 +629,23 @@ function start (message) {
             interface.appendChild(tweaker)
             document.body.appendChild(interface)
             document.querySelector('.smartcss-tweaker-container').appendChild(partInterface)
-            setTimeout(function () {
+            setTimeout(function() {
                 document.querySelector('.smartcss-interface-loader').classList.add('fade-loader')
-                setTimeout(function () {
+                setTimeout(function() {
                     document.querySelector('.smartcss-interface').removeChild(document.querySelector('.smartcss-interface-loader'))
                 }, 300)
             }, 2000)
         }
-        function createUIElements (type) {
+
+        function createUIElements(type) {
             var element = document.createElement('DIV')
             switch (type) {
                 case 'interface':
-                element.classList.add('smartcss-interface')
-                break
-                case 'toolbar': 
-                element.classList.add('smartcss-interface-toolbar')
-                element.innerHTML = `
+                    element.classList.add('smartcss-interface')
+                    break
+                case 'toolbar':
+                    element.classList.add('smartcss-interface-toolbar')
+                    element.innerHTML = `
                     <div class='selected-element-displayer'>
                         <div>
                             Selected element:
@@ -606,12 +653,17 @@ function start (message) {
                         <div class='selected-element'>
                            No element selected. Please double click on a element to select it.
                         </div>
+                        <div class='smartcss-unit-changer'>
+                            <button>px</button>
+                            <button>%</button>
+                            <button>em</button>
+                        </div>
                     </div>
                 `
-                break
-                case 'loader': 
-                element.classList.add('smartcss-interface-loader')
-                element.innerHTML = `
+                    break
+                case 'loader':
+                    element.classList.add('smartcss-interface-loader')
+                    element.innerHTML = `
                     <div class='loader'>
                         <div class="smartcss-loader-ellipsis">
                             <div></div>
@@ -621,65 +673,66 @@ function start (message) {
                         </div>
                     </div>
                 `
-                break
-                case 'css-text': 
-                element.classList.add('smartcss-text-container')
-                let cssText = document.createElement('DIV')
-                cssText.classList.add('smartcss-text')
-                element.appendChild(cssText)
-                let copyBtn = document.createElement('BUTTON')
-                copyBtn.innerText = 'Copy'
-                copyBtn.onclick = () => {
-                    let ghostInput = document.createElement('TEXTAREA')
-                    ghostInput.style.opacity = '0'
-                    ghostInput.style.height = '0px'
-                    ghostInput.value = document.querySelector('.smartcss-text').innerText
-                    document.body.appendChild(ghostInput)
-                    ghostInput.select()
-                    document.execCommand('copy')
-                    document.body.removeChild(ghostInput)
-                    copyBtn.innerText = 'Copied!'
-                    setTimeout(() =>  {
-                        toggleCSS()
-                        copyBtn.innerText = 'Copy'
-                    }, 1000)
-                }
-                element.appendChild(copyBtn)
-                break
+                    break
+                case 'css-text':
+                    element.classList.add('smartcss-text-container')
+                    let cssText = document.createElement('DIV')
+                    cssText.classList.add('smartcss-text')
+                    element.appendChild(cssText)
+                    let copyBtn = document.createElement('BUTTON')
+                    copyBtn.innerText = 'Copy'
+                    copyBtn.onclick = () => {
+                        let ghostInput = document.createElement('TEXTAREA')
+                        ghostInput.style.opacity = '0'
+                        ghostInput.style.height = '0px'
+                        ghostInput.value = document.querySelector('.smartcss-text').innerText
+                        document.body.appendChild(ghostInput)
+                        ghostInput.select()
+                        document.execCommand('copy')
+                        document.body.removeChild(ghostInput)
+                        copyBtn.innerText = 'Copied!'
+                        setTimeout(() => {
+                            toggleCSS()
+                            copyBtn.innerText = 'Copy'
+                        }, 1000)
+                    }
+                    element.appendChild(copyBtn)
+                    break
                 case 'tweaker':
-                element.classList.add('smartcss-tweaker-container')
-                element.innerHTML = `
+                    element.classList.add('smartcss-tweaker-container')
+                    element.innerHTML = `
                 <h1 class='tweaker-header'>Tweak property: <span class='smartcss-chosen-property'></span></h1>
                 <div class='smartcss-tweaker'>
                 </div>
                 `
-                break
+                    break
                 case 'chooser':
-                element.classList.add('smartcss-property-container')
-                element.innerHTML = `
+                    element.classList.add('smartcss-property-container')
+                    element.innerHTML = `
                 <h1 class='chooser-header'>Select a property</h1>
                 <div class='smartcss-properties-catalogue'>  
                 </div>
                 `
-                break
+                    break
                 case 'actions':
-                element.classList.add('smartcss-actions-container')
-                let button = document.createElement('BUTTON')
-                button.onclick = function (e) {
-                    toggleCSS (e)
-                }
-                button.innerHTML = `<i class="fas fa-pen"></i>CSS`
-                element.appendChild(button)
-                break
+                    element.classList.add('smartcss-actions-container')
+                    let button = document.createElement('BUTTON')
+                    button.onclick = function(e) {
+                        toggleCSS(e)
+                    }
+                    button.innerHTML = `<i class="fas fa-pen"></i>CSS`
+                    element.appendChild(button)
+                    break
                 case 'part-slider':
-                element.classList.add('smartcss-part-container')
-                element.style.display = 'none'
-                break
+                    element.classList.add('smartcss-part-container')
+                    element.style.display = 'none'
+                    break
             }
             return element
         }
-        function toggleCSS (e) {
-            if(document.querySelector('.smartcss-text-container').classList.contains('slide-in')) {
+
+        function toggleCSS(e) {
+            if (document.querySelector('.smartcss-text-container').classList.contains('slide-in')) {
                 document.querySelector('.smartcss-text-container').classList.remove('slide-in')
                 setTimeout(() => document.querySelector('.smartcss-text').innerHTML = '', 300)
                 document.querySelector('.smartcss-actions-container > button').innerHTML = `<i class="fas fa-pen"></i>CSS`
@@ -689,15 +742,21 @@ function start (message) {
                 updateCSS()
             }
         }
-        function bindDoubleClick (totalElems) {
-            totalElems.forEach(function (el) {
+        document.querySelectorAll('.smartcss-unit-changer > button').forEach((button) => {
+            button.onclick = e => changeUnit(e)
+        })
+
+        function bindDoubleClick(totalElems) {
+            totalElems.forEach(function(el) {
                 el.setAttribute('smartcss-id', makeid())
                 el.addEventListener('dblclick', changeElement)
             })
         }
+
         function changeElement(e) {
-            if(selectedElement !== event.target) {
-                if(selectedElement && localStorage[selectedElement.getAttribute('smartcss-id')]) {
+            if (selectedElement !== event.target) {
+                changeUnit()
+                if (selectedElement && localStorage[selectedElement.getAttribute('smartcss-id')]) {
                     changedValues = JSON.parse(localStorage[selectedElement.getAttribute('smartcss-id')])
                     updateCSS()
                 } else if (selectedElement && Object.keys(changedValues).length > 0) {
@@ -707,129 +766,151 @@ function start (message) {
                 }
                 resetTweaker()
                 selectedElement = event.target
+                highlightElement(selectedElement)
                 var htmlString = String(selectedElement.outerHTML)
-                if (htmlString.length > 100) htmlString = htmlString.slice(0, 100)+ '...'
+                htmlString = htmlString.includes('class="smartcss-glow"') ? htmlString = htmlString.replace('class="smartcss-glow"', '') : htmlString.replace(' smartcss-glow', '')
+                if (htmlString.length > 100) htmlString = htmlString.slice(0, 100) + '...'
                 document.querySelector('.selected-element').innerText = htmlString
                 showProperties(selectedElement)
             }
         }
     }
 
-    function resetTweaker () {
+    function highlightElement(el) {
+        el.classList.add('smartcss-glow')
+        setTimeout(function() {
+            el.classList.remove('smartcss-glow')
+        }, 2000)
+    }
+
+    function resetTweaker() {
         document.querySelector('.smartcss-chosen-property').innerText = ''
         document.querySelector('.smartcss-tweaker').innerText = ''
     }
-   
+
     function getSuffix(pName) {
-        if(pxProperties.includes(pName)) return 'px'
-        if(absoluteProperties.includes(pName)) return ''
-        if(colorProperties.includes(pName)) return ''
+        if (pxProperties.includes(pName)) return unit
+        if (absoluteProperties.includes(pName)) return ''
+        if (colorProperties.includes(pName)) return ''
     }
+
     function getMin(pName) {
-        if(['translateX', 'translateY', 'translateZ'].includes(pName)) return -1000
-        if(pxProperties.includes(pName)) return 0
-        if(['scaleX', 'scaleY', 'scaleZ'].includes(pName)) return 0
-        if(absoluteProperties.includes(pName)) return 0
-        if(radianProperties.includes(pName)) return -360
+        if (['translateX', 'translateY', 'translateZ'].includes(pName)) return -1000
+        if (pxProperties.includes(pName)) return 0
+        if (['scaleX', 'scaleY', 'scaleZ'].includes(pName)) return 0
+        if (absoluteProperties.includes(pName)) return 0
+        if (radianProperties.includes(pName)) return -360
     }
+
     function getMax(pName) {
-        if(['translateX', 'translateY', 'translateZ'].includes(pName)) return 1000
-        if(pxProperties.includes(pName)) return 2000
-        if(['scaleX', 'scaleY', 'scaleZ'].includes(pName)) return 10
-        if(absoluteProperties.includes(pName)) return 1
-        if(radianProperties.includes(pName)) return 360
+        if (['translateX', 'translateY', 'translateZ'].includes(pName)) return 1000
+        if (pxProperties.includes(pName)) return 2000
+        if (['scaleX', 'scaleY', 'scaleZ'].includes(pName)) return 10
+        if (absoluteProperties.includes(pName)) return 1
+        if (radianProperties.includes(pName)) return 360
     }
+
     function getStep(pName) {
-        if(pxProperties.includes(pName)) return 1
-        if(absoluteProperties.includes(pName)) return 0.1
-        if(radianProperties.includes(pName)) return 1
+        if (pxProperties.includes(pName)) return 1
+        if (absoluteProperties.includes(pName)) return 0.1
+        if (radianProperties.includes(pName)) return 1
     }
+
     function getInitialValues(pName) {
-        if(['translateX', 'translateY', 'translateZ'].includes(pName)) return 0
-        if(['scaleX', 'scaleY', 'scaleZ'].includes(pName)) return 1
-        if(radianProperties.includes(pName)) return 0
+        if (['translateX', 'translateY', 'translateZ'].includes(pName)) return 0
+        if (['scaleX', 'scaleY', 'scaleZ'].includes(pName)) return 1
+        if (radianProperties.includes(pName)) return 0
     }
-    
-    function getPropertyType (pName) {
-        if(numericProperty.includes(pName)) return 'numeric'
-        if(alphabeticProperty.includes(pName)) return 'alphabetic'
-        if(complexProperty.includes(pName)) return 'complex'
-        if(colorProperties.includes(pName)) return 'color'
+
+    function getPropertyType(pName) {
+        if (numericProperty.includes(pName)) return 'numeric'
+        if (alphabeticProperty.includes(pName)) return 'alphabetic'
+        if (complexProperty.includes(pName)) return 'complex'
+        if (colorProperties.includes(pName)) return 'color'
     }
-    function getAlphabeticValues (pName) {
+
+    function getAlphabeticValues(pName) {
         switch (pName) {
             case 'position':
-            return ['static', 'relative', 'absolute', 'fixed', 'inherit', 'initial', 'sticky', 'unset']
+                return ['static', 'relative', 'absolute', 'fixed', 'inherit', 'initial', 'sticky', 'unset']
             case 'display':
-            return ['block', 'inline-block', 'flex', 'inline-flex', 'grid', 'contents', 'inline', 'inline-grid', 'inline-table', 'table', 'list-item', 'run-in', 'table-caption', 'table-column-group', 'table-header-group', 'table-footer-group', 'table-row-group', 'table-cell', 'table-column', 'table-row', 'none', 'initial']
+                return ['block', 'inline-block', 'flex', 'inline-flex', 'grid', 'contents', 'inline', 'inline-grid', 'inline-table', 'table', 'list-item', 'run-in', 'table-caption', 'table-column-group', 'table-header-group', 'table-footer-group', 'table-row-group', 'table-cell', 'table-column', 'table-row', 'none', 'initial']
             case 'justify-content':
             case 'align-items':
-            return ['flex-start', 'center', 'flex-end', 'baseline', 'space-around', 'space-between']
-        }
-    }
-    function getParts (pName) {
-        switch (pName) {
-            case 'transform':
-            return ['translateX', 'translateY', 'translateZ', 'rotateX', 'scaleX', 'scaleY', 'scaleZ',  'rotateY', 'rotateZ', 'skewX', 'skewY']
+                return ['flex-start', 'center', 'flex-end', 'baseline', 'space-around', 'space-between']
+            case 'border-style':
+                return ['solid', 'dashed', 'dotted', 'double', 'hidden', 'groove', 'ridge', 'inset', 'outset', 'none']
         }
     }
 
-    function getUnitForPart (part) {
-        if(['rotateX', 'rotateY', 'rotateZ', 'skewX', 'skewY'].includes(part)) return 'deg'
-        if(['translateX', 'translateY', 'translateZ'].includes(part)) return 'px'
-        if(['scaleX', 'scaleY', 'scaleZ'].includes(part)) return ''
+    function getParts(pName) {
+        switch (pName) {
+            case 'transform':
+                return ['translateX', 'translateY', 'translateZ', 'rotateX', 'scaleX', 'scaleY', 'scaleZ', 'rotateY', 'rotateZ', 'skewX', 'skewY']
+        }
     }
-    function onPropertySelect (e, elem) {
-        if(!document.getElementById(e.target.id).classList.contains('active')) {
+
+    function getUnitForPart(part) {
+        if (['rotateX', 'rotateY', 'rotateZ', 'skewX', 'skewY'].includes(part)) return 'deg'
+        if (['translateX', 'translateY', 'translateZ'].includes(part)) return unit
+        if (['scaleX', 'scaleY', 'scaleZ'].includes(part)) return ''
+    }
+
+    function onPropertySelect(e, elem) {
+        changeUnit()
+        if (!document.getElementById(e.target.id).classList.contains('active')) {
             document.getElementById(e.target.id).classList.add('active')
-            if(document.getElementById('btn-for-' + activeProperty)) {
+            if (document.getElementById('btn-for-' + activeProperty)) {
                 document.getElementById('btn-for-' + activeProperty).classList.remove('active')
             }
             activeProperty = e.target.getAttribute('data-property')
             document.querySelector('.smartcss-chosen-property').innerText = activeProperty
             makeControls(elem, activeProperty)
         }
-       
+
     }
+
     function showProperties(elem) {
         var commonPropertiesPreset = supportedProperties
         document.querySelector('.smartcss-properties-catalogue').innerHTML = ''
-        var propertyContainer = document.querySelector('.smartcss-properties-catalogue') 
-        commonPropertiesPreset.forEach ((property) => {
-          var button = document.createElement("BUTTON")
-          button.innerText = property
-          var propertyValue = window.getComputedStyle(elem, null).getPropertyValue(property)
-          defaultValues[property] = propertyValue
-          button.setAttribute('class', 'smartcss-property-btn')
-          button.setAttribute('data-property', property)
-          button.id = 'btn-for-' + property
-          button.onclick = function (e) {
-              onPropertySelect(e, elem)
-          }
-          propertyContainer.appendChild(button)
+        var propertyContainer = document.querySelector('.smartcss-properties-catalogue')
+        commonPropertiesPreset.forEach((property) => {
+            var button = document.createElement("BUTTON")
+            button.innerText = property
+            var propertyValue = window.getComputedStyle(elem, null).getPropertyValue(property)
+            defaultValues[property] = propertyValue
+            button.setAttribute('class', 'smartcss-property-btn')
+            button.setAttribute('data-property', property)
+            button.id = 'btn-for-' + property
+            button.onclick = function(e) {
+                onPropertySelect(e, elem)
+            }
+            propertyContainer.appendChild(button)
         })
-    } 
-    function changePropertyValue (pName,  pValue, elem, valueSpanID) {
+    }
+
+    function changePropertyValue(pName, pValue, elem, valueSpanID) {
         document.querySelector('.smartcss-actions-container').style.opacity = '1'
         var value = pValue + getSuffix(pName)
         elem.style[pName] = value
         changedValues[pName] = value
         document.getElementById(valueSpanID).innerText = value
     }
-    function chooseAlphaValues (e, propertyName, elem) {
+
+    function chooseAlphaValues(e, propertyName, elem) {
         document.querySelector('.smartcss-actions-container').style.opacity = '1'
         if (!e.target.classList.contains('active')) {
             e.target.classList.add('active')
-            elem.style[propertyName] =  e.target.getAttribute('data-property-value')
-            changedValues[propertyName] =  e.target.getAttribute('data-property-value')
-            if(Object.keys(activePropertyValues) && activePropertyValues[propertyName]) {
+            elem.style[propertyName] = e.target.getAttribute('data-property-value')
+            changedValues[propertyName] = e.target.getAttribute('data-property-value')
+            if (Object.keys(activePropertyValues) && activePropertyValues[propertyName]) {
                 document.getElementById('btn-for-' + activePropertyValues[propertyName]).classList.remove('active')
             }
             activePropertyValues[propertyName] = e.target.getAttribute('data-property-value')
         }
     }
-    
-  
+
+
     function createPartSlider(elem, propertyName, part) {
         document.querySelector('.smartcss-actions-container').style.opacity = '1'
         var suffix = getUnitForPart(part)
@@ -838,7 +919,6 @@ function start (message) {
         var max = getMax(part)
         var min = getMin(part)
         var initialValue = propertyValue
-        console.log(initialValue)
         var html = `
         <div>
             <div>
@@ -853,59 +933,62 @@ function start (message) {
         child.id = part + '-part'
         document.querySelector('.smartcss-part-container').appendChild(child)
         document.getElementById(randomId).oninput = (e) => {
-            var part =  e.target.getAttribute('data-partName')
-            var propertyName =  e.target.getAttribute('data-propertyName')
+            var part = e.target.getAttribute('data-partName')
+            var propertyName = e.target.getAttribute('data-propertyName')
             var value = e.target.value
             document.getElementById(randomId + 'span').innerText = value + suffix
             activecomplexProperties[propertyName][part] = value
             changedValues[propertyName] = getComplexStringValue(propertyName)
-            updateComplexProperty(elem, propertyName)  
-            updateCSS()       
+            updateComplexProperty(elem, propertyName)
+            updateCSS()
         }
     }
 
     function appendPart(elem, propertyName, part) {
-            switch (propertyName) {
-                case 'transform':
-                    if( activecomplexProperties[propertyName]) {
-                        activecomplexProperties[propertyName][part] = getInitialValues(part)
-                        changedValues[propertyName] = getComplexStringValue(propertyName)
-                        updateComplexProperty(elem, propertyName)         
-                    } else {
-                        activecomplexProperties[propertyName] = {}
-                        activecomplexProperties[propertyName][part] = getInitialValues(part)
-                        changedValues[propertyName] = getComplexStringValue(propertyName)
-                        updateComplexProperty(elem, propertyName)       
-                    }     
-                    createPartSlider(elem, propertyName, part)             
+        switch (propertyName) {
+            case 'transform':
+                if (activecomplexProperties[propertyName]) {
+                    activecomplexProperties[propertyName][part] = getInitialValues(part)
+                    changedValues[propertyName] = getComplexStringValue(propertyName)
+                    updateComplexProperty(elem, propertyName)
+                } else {
+                    activecomplexProperties[propertyName] = {}
+                    activecomplexProperties[propertyName][part] = getInitialValues(part)
+                    changedValues[propertyName] = getComplexStringValue(propertyName)
+                    updateComplexProperty(elem, propertyName)
+                }
+                createPartSlider(elem, propertyName, part)
                 break;
-            }
-       
+        }
+
     }
-  
-    function getComplexStringValue (propertyName) {
-        
-       let cssString =  ``
-       Object.keys(activecomplexProperties[propertyName]).forEach((part) => {
-        cssString += `${part}(${activecomplexProperties[propertyName][part] + getUnitForPart(part)}) `
-       })
-       return cssString
+
+    function getComplexStringValue(propertyName) {
+
+        let cssString = ``
+        Object.keys(activecomplexProperties[propertyName]).forEach((part) => {
+            cssString += `${part}(${activecomplexProperties[propertyName][part] + getUnitForPart(part)}) `
+        })
+        return cssString
     }
+
     function updateComplexProperty(elem, propertyName) {
         elem.style[propertyName] = changedValues[(propertyName)]
         document.querySelector('.smartcss-compound-property-value').innerText = changedValues[propertyName]
 
     }
-    function destroyPartSlider (part) {
-        document.querySelector('.smartcss-part-container').removeChild(document.getElementById(part+'-part'))
+
+    function destroyPartSlider(part) {
+        document.querySelector('.smartcss-part-container').removeChild(document.getElementById(part + '-part'))
     }
+
     function removePart(elem, propertyName, part) {
         delete activecomplexProperties[propertyName][part]
         changedValues[propertyName] = getComplexStringValue(propertyName)
-        updateComplexProperty(elem, propertyName) 
-        destroyPartSlider(part)    
+        updateComplexProperty(elem, propertyName)
+        destroyPartSlider(part)
     }
-    
+
     function makeControls(elem, propertyName) {
         document.querySelector('.smartcss-tweaker').innerHTML = ''
         var randomId = makeid()
@@ -913,16 +996,16 @@ function start (message) {
         var propertyValue = window.getComputedStyle(elem, null).getPropertyValue(propertyName)
         var propertyType = getPropertyType(propertyName)
         switch (propertyType) {
-            case 'complex' : 
-            if(document.querySelector('.smartcss-compound-property') && document.querySelector('.smartcss-compound-property').getAttribute('data-active-complex-property') === `${propertyName}`) {
-                return 
-            } else if (document.querySelector('.smartcss-compound-property')) {
-                document.querySelector('.smartcss-tweaker').removeChild(document.querySelector('.smartcss-compound-property'))
-            }
-            document.querySelector('.smartcss-part-container').style.display = 'inline-block'
-            document.querySelector('.smartcss-tweaker').style.width = '50%'
-            let complexDiv = document.createElement("DIV")
-            let complex = `
+            case 'complex':
+                if (document.querySelector('.smartcss-compound-property') && document.querySelector('.smartcss-compound-property').getAttribute('data-active-complex-property') === `${propertyName}`) {
+                    return
+                } else if (document.querySelector('.smartcss-compound-property')) {
+                    document.querySelector('.smartcss-tweaker').removeChild(document.querySelector('.smartcss-compound-property'))
+                }
+                document.querySelector('.smartcss-part-container').style.display = 'inline-block'
+                document.querySelector('.smartcss-tweaker').style.width = '50%'
+                let complexDiv = document.createElement("DIV")
+                let complex = `
                 <div class='smartcss-compound-property' data-active-complex-property='${propertyName}'>
                     <div class='smartcss-compound-property-display'>
                         <span class='smartcss-compound-property-value'>${propertyValue}</span>
@@ -931,87 +1014,87 @@ function start (message) {
                     </div>
                 </div>
             `
-            complexDiv.innerHTML = complex
-            document.querySelector('.smartcss-tweaker').appendChild(complexDiv)
-            let containerOfParts = document.querySelector('.smartcss-compound-property-values')
-            let parts = getParts(propertyName)
-            parts.forEach(part => {
-                var unit = getUnitForPart(part)
-                var partButton = document.createElement('BUTTON')
-                partButton.setAttribute('class', 'smartcss-property-btn')
-                partButton.setAttribute('data-part', part)
-                partButton.innerText = part
-                if(propertyValue.includes(part)) {
-                    partButton.classList.add('active')
-                }
-                partButton.onclick = (e) => {
-                    if(e.target.classList.contains('active')) {
-                        e.target.classList.remove('active')
-                        removePart(elem, propertyName, part)
-                    } else {
-                        e.target.classList.add('active')
-                        appendPart(elem, propertyName, part)
+                complexDiv.innerHTML = complex
+                document.querySelector('.smartcss-tweaker').appendChild(complexDiv)
+                let containerOfParts = document.querySelector('.smartcss-compound-property-values')
+                let parts = getParts(propertyName)
+                parts.forEach(part => {
+                    var unit = getUnitForPart(part)
+                    var partButton = document.createElement('BUTTON')
+                    partButton.setAttribute('class', 'smartcss-property-btn')
+                    partButton.setAttribute('data-part', part)
+                    partButton.innerText = part
+                    if (propertyValue.includes(part)) {
+                        partButton.classList.add('active')
                     }
-                }
-                containerOfParts.appendChild(partButton)
-            })
-            break
+                    partButton.onclick = (e) => {
+                        if (e.target.classList.contains('active')) {
+                            e.target.classList.remove('active')
+                            removePart(elem, propertyName, part)
+                        } else {
+                            e.target.classList.add('active')
+                            appendPart(elem, propertyName, part)
+                        }
+                    }
+                    containerOfParts.appendChild(partButton)
+                })
+                break
             case 'alphabetic':
-            document.querySelector('.smartcss-part-container').style.display = 'none'
-            document.querySelector('.smartcss-tweaker').style.width = '100%'
-            let values = getAlphabeticValues(propertyName)
-            values.forEach(value => {
-                let button = document.createElement("BUTTON")
-                button.innerText = value
-                button.id = 'btn-for-' + value
-                button.setAttribute('class', 'smartcss-property-btn')
-                if(activePropertyValues[propertyName] === value) {
-                    button.classList.add('active')
-                }
-                if( propertyValue === value) {
-                    button.classList.add('active')
-                    activePropertyValues[propertyName] = value
-                }
-                button.setAttribute('data-property-value', value)
-                button.onclick = (e) => {
-                    chooseAlphaValues(e, propertyName, elem)
-                    updateCSS() 
-                }
-                document.querySelector('.smartcss-tweaker').appendChild(button)
-            }) 
-            break
+                document.querySelector('.smartcss-part-container').style.display = 'none'
+                document.querySelector('.smartcss-tweaker').style.width = '100%'
+                let values = getAlphabeticValues(propertyName)
+                values.forEach(value => {
+                    let button = document.createElement("BUTTON")
+                    button.innerText = value
+                    button.id = 'btn-for-' + value
+                    button.setAttribute('class', 'smartcss-property-btn')
+                    if (activePropertyValues[propertyName] === value) {
+                        button.classList.add('active')
+                    }
+                    if (propertyValue === value) {
+                        button.classList.add('active')
+                        activePropertyValues[propertyName] = value
+                    }
+                    button.setAttribute('data-property-value', value)
+                    button.onclick = (e) => {
+                        chooseAlphaValues(e, propertyName, elem)
+                        updateCSS()
+                    }
+                    document.querySelector('.smartcss-tweaker').appendChild(button)
+                })
+                break
             case 'color':
-            document.querySelector('.smartcss-part-container').style.display = 'none'
-            document.querySelector('.smartcss-tweaker').style.width = '100%'
-            var html = `
+                document.querySelector('.smartcss-part-container').style.display = 'none'
+                document.querySelector('.smartcss-tweaker').style.width = '100%'
+                var html = `
             <div>
                 <span id=${randomId + 'span'}>${propertyValue}</span>
             </div>
             <input type="color" class='smartcss-slider  smartcss-slider-color' value="${propertyValue}" data-value-span=${randomId + 'span'} data-propertyname='${propertyName}' id='${randomId}' name="${randomId + propertyName}" />
             <button class='smartcss-reset-btn' id="${randomId + 'resetter'}"><i class='fas fa-redo'></i></button> 
             `
-            var child = document.createElement("DIV")
-            child.innerHTML = html
-            document.querySelector('.smartcss-tweaker').appendChild(child)
-            document.getElementById(randomId + 'resetter').onclick = () => {
-                document.getElementById(randomId).value = defaultValues[propertyName]
-                document.getElementById(randomId + 'span').innerText = defaultValues[propertyName]
-                elem.style[propertyName] = defaultValues[propertyName]
-                changedValues[propertyName] = defaultValues[propertyName]
-                updateCSS()
-            }
-            document.getElementById(randomId).oninput = (e) => {
-                changePropertyValue(e.target.getAttribute('data-propertyname'), e.target.value, elem, e.target.getAttribute('data-value-span'))
-                updateCSS()
-            }
-           
-            break
-            case 'numeric' :
-            document.querySelector('.smartcss-part-container').style.display = 'none'
-            document.querySelector('.smartcss-tweaker').style.width = '100%'
-            var suffix = getSuffix(propertyName)
-            var max = getMax(propertyName)
-            var html = `
+                var child = document.createElement("DIV")
+                child.innerHTML = html
+                document.querySelector('.smartcss-tweaker').appendChild(child)
+                document.getElementById(randomId + 'resetter').onclick = () => {
+                    document.getElementById(randomId).value = defaultValues[propertyName]
+                    document.getElementById(randomId + 'span').innerText = defaultValues[propertyName]
+                    elem.style[propertyName] = defaultValues[propertyName]
+                    changedValues[propertyName] = defaultValues[propertyName]
+                    updateCSS()
+                }
+                document.getElementById(randomId).oninput = (e) => {
+                    changePropertyValue(e.target.getAttribute('data-propertyname'), e.target.value, elem, e.target.getAttribute('data-value-span'))
+                    updateCSS()
+                }
+
+                break
+            case 'numeric':
+                document.querySelector('.smartcss-part-container').style.display = 'none'
+                document.querySelector('.smartcss-tweaker').style.width = '100%'
+                var suffix = getSuffix(propertyName)
+                var max = getMax(propertyName)
+                var html = `
             <div>
                 <label>${propertyName}</label>
                 <span id=${randomId + 'span'}>${propertyValue}</span>
@@ -1019,51 +1102,52 @@ function start (message) {
             <input type="range" class='smartcss-slider' value="${Number(propertyValue.split(suffix)[0])}" data-value-span=${randomId + 'span'} data-propertyname='${propertyName}' id='${randomId}' name="${randomId + propertyName}" min="0" max=${max} step="${step}"/>
             <button class='smartcss-reset-btn' id="${randomId + 'resetter'}"><i class='fas fa-redo'></i></button> 
             `
-            var child = document.createElement("DIV")
-            child.innerHTML = html
-            document.querySelector('.smartcss-tweaker').appendChild(child)
-            document.getElementById(randomId + 'resetter').onclick = function () {
-                document.getElementById(randomId).value = Number(defaultValues[propertyName].split(suffix)[0])
-                document.getElementById(randomId + 'span').innerText = defaultValues[propertyName]
-                elem.style[propertyName] = defaultValues[propertyName]
-                changedValues[propertyName] = defaultValues[propertyName]
-                updateCSS()
-            }
-            document.getElementById(randomId).oninput = (e) => {
-                changePropertyValue(e.target.getAttribute('data-propertyname'), e.target.value, elem, e.target.getAttribute('data-value-span'))
-                updateCSS()
-            }
-            break 
+                var child = document.createElement("DIV")
+                child.innerHTML = html
+                document.querySelector('.smartcss-tweaker').appendChild(child)
+                document.getElementById(randomId + 'resetter').onclick = function() {
+                    document.getElementById(randomId).value = Number(defaultValues[propertyName].split(suffix)[0])
+                    document.getElementById(randomId + 'span').innerText = defaultValues[propertyName]
+                    elem.style[propertyName] = defaultValues[propertyName]
+                    changedValues[propertyName] = defaultValues[propertyName]
+                    updateCSS()
+                }
+                document.getElementById(randomId).oninput = (e) => {
+                    changePropertyValue(e.target.getAttribute('data-propertyname'), e.target.value, elem, e.target.getAttribute('data-value-span'))
+                    updateCSS()
+                }
+                break
         }
     }
+
     function makeid() {
         var id = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      
+
         for (var i = 0; i < 5; i++)
-          id += possible.charAt(Math.floor(Math.random() * possible.length));
-      
+            id += possible.charAt(Math.floor(Math.random() * possible.length));
+
         return id;
-      }
-      
-    function styleMaker (css, mute) {
-        if(css) {
-            if(mute === '--verbose' || mute === '-v') console.log('Initialising Style Maker', css);
+    }
+
+    function styleMaker(css, mute) {
+        if (css) {
+            if (mute === '--verbose' || mute === '-v') console.log('Initialising Style Maker', css);
             var head = document.head || document.getElementsByTagName('head')[0];
             var style = document.createElement('style');
-        
+
             style.type = 'text/css';
-            if (style.styleSheet){
-            // This is required for IE8 and below.
+            if (style.styleSheet) {
+                // This is required for IE8 and below.
                 style.styleSheet.cssText = css;
             } else {
                 style.appendChild(document.createTextNode(css));
-             }
+            }
             head.appendChild(style);
-            if(mute === '--verbose' || mute === '-v') console.log('Style Added');
+            if (mute === '--verbose' || mute === '-v') console.log('Style Added');
         } else {
             console.log('Please call StylerMaker with a valid cssText argument');
         }
-       
+
     }
 }

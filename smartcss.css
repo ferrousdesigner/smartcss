@@ -1,10 +1,17 @@
 body{
     color: #888;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.title {
+    font-weight: normal;
+    letter-spacing: -2px;
+    margin-bottom: 10px;
 }
 .title i{
     margin-left: 5px;
-    color: #5dcb8b;
+    color: #6e38cd;
+    font-size: 13rem;
 }
 .control-container {
     justify-content: center;
@@ -18,17 +25,21 @@ body{
     border-radius: 5px;
 }
  .start {
-    background: #5dcb8b;
+    background: #6e38cd;
     padding: 0.8rem 1.5rem;
     color: #fff;
     border-radius: 30px;
     border: none;
     font-size: 1rem;
+    font-weight: bolder;
     transition: all 0.3s ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    width: 70%;
+    margin-left: 30%;
+    margin-top: 15%;
 }
 .start:focus{
     outline: none;
@@ -59,6 +70,7 @@ body{
     }
 }
 .ferrous-link {
-    color: #5dcb8b;
+    color: #6e38cd;
     text-decoration: none;
+    margin-top: 1rem;
 }
